@@ -7,10 +7,10 @@ COPY package*.json ./
 
 RUN npm install
 RUN npm install axios
-npm install express
+RUN npm install express
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE 3000
 
-CMD [ "node", "clima" ]
+CMD [ "node", "clima.js" ]
