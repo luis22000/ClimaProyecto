@@ -16,7 +16,7 @@ app.get('/:id/:llave', function (req, res) {
   const VarClima = Clima(llave,id,res)
     .then(response => {
       if (response.data) {
-		res.send(response.data)
+		res.send(response.data.list[0])
       }
     })
     .catch(error => {
@@ -26,7 +26,24 @@ app.get('/:id/:llave', function (req, res) {
 }
   ObtenerClima()
 });
-
+app.get('/ciudad/:id/:llave', function (req, res) {
+  var llave = req.params.llave;
+  var id = req.params.id;
+  
+  const ObtenerClima = async () => {
+  const VarClima = Clima(llave,id,res)
+    .then(response => {
+      if (response.data) {
+		res.send(response.data.city)
+      }
+    })
+    .catch(error => {
+      res.send(error)
+    })
+	
+}
+  ObtenerClima()
+});
 const Clima = (llave,id,res) => {
   try {
     return axios.get('http://api.openweathermap.org/data/2.5/forecast?id='+id+'&APPID='+llave)
